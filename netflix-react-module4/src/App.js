@@ -11,23 +11,34 @@ class App extends Component{
   }
   render(){
      return (
-    <>
-      <NetflixNavbar />
-      <SearchArea />
-      {/* <CustomCarousel searchQuery="Lord of the rings" /> */}
+       <div className="container-fluid mx-3 ">
+         <NetflixNavbar />
+         <SearchArea />
 
-      {/*  <CustomCarousel /> */}
-      <>
-      <NetflixNavbar  searchCallback={(childSearchquery)=>this.setState({query:childSearchquery})} />
-{console.log(this.state.query)}
-     {!this.state.query?<CustomCarousel searchQuery="harry potter" title="harry potter" />:<CustomCarousel searchQuery={this.state.query} title=" Searched Movies" />} 
-     <CustomCarousel searchQuery="Lord of the rings" title="lord of the rings" />
-     <CustomCarousel searchQuery="star wars" title="star wars" />
-    
-    </>
-      <Footer />
-    </>
-  )
+         <NetflixNavbar
+           searchCallback={(childSearchquery) =>
+             this.setState({ query: childSearchquery })
+           }
+         />
+
+         {!this.state.query ? (
+           <CustomCarousel searchQuery="Kung Fu Panda" title="Kung Fu Panda" />
+         ) : (
+           <CustomCarousel
+             searchQuery={this.state.query}
+             title=" Searched Movies"
+           />
+         )}
+         <CustomCarousel
+           searchQuery="Luca"
+           title="Luca"
+         />
+         <CustomCarousel searchQuery="Shrek" title="Shrek" />
+         <CustomCarousel searchQuery="Toy Story" title="Toy Story" />
+
+         <Footer />
+       </div>
+     );
   }
  
 }
