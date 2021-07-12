@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Button, Modal } from "react-bootstrap";
-import SecondComArea from "./SecondComArea";
+import CommentArea from "./CommentArea";
 
 export default class MyCarouselMovie extends Component {
   state = {
@@ -24,7 +24,7 @@ export default class MyCarouselMovie extends Component {
           }}
         />
         {this.state.selected && (
-          <SecondComArea
+          <CommentArea
             show={this.state.show}
             handleClose={this.handleClose}
             movie={this.props.movie}

@@ -8,7 +8,7 @@ export default class AddComment extends Component {
     comments: {
       comment: "",
       rate: 1,
-      elementId: "",
+      elementId: this.props.movie.imdbID,
     },
     isLoading: true,
     isError: false,
@@ -32,6 +32,7 @@ export default class AddComment extends Component {
       );
       if (response.ok) {
         alert("successful");
+        this.props.fetchComments();
 
         console.log(response);
       } else {
@@ -54,7 +55,7 @@ export default class AddComment extends Component {
         {this.state.isError && <Warnning variant="danger" msg="Error" />}
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
-            <Form.Label>Your Comment</Form.Label>
+            <Form.Label>Enter Your Comment</Form.Label>
             <Form.Control
               as="textarea"
               rows={2}
@@ -84,11 +85,13 @@ export default class AddComment extends Component {
             <Form.Label>Movie Id</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter movie id"
               value={this.state.comments.elementId}
+              disabled
+              /*   placeholder="Enter movie id"
+             value={this.state.comments.elementId}
               onChange={(e) => {
                 this.handleChange("elementId", e.target.value);
-              }}
+              }} */
             />
           </Form.Group>
           <Button variant="success" className="btn-sm" type="submit">
