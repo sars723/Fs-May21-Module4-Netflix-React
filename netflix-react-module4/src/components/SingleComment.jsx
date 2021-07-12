@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
+import Warnning from "./Warnning";
 
 export default class SingleComment extends Component {
+  state = {
+    isError: false,
+  };
   deleteComment = async () => {
     try {
       const response = await fetch(
@@ -19,29 +23,38 @@ export default class SingleComment extends Component {
         alert("successfuly deleted");
         this.props.fetchComments();
       } else {
+        this.setState({
+          isError: true,
+        });
         alert("sth wrong");
       }
     } catch (error) {
+      this.setState({
+        isError: true,
+      });
       console.log(error);
     }
   };
   render() {
     return (
-      <div
-        className="d-flex justify-content-between mb-3"
-        style={{ borderBottom: "1px solid black" }}
-      >
-        {console.log(this.props.comment)}
-        <p>{this.props.comment.comment}</p>
-        <Button
-          className="btn-sm"
-          variant="danger"
-          onClick={this.deleteComment}
-          style={{ margin: "4px" }}
+      <>
+        {this.state.isError && <Warnning variant="danger" msg="error" />}
+        <div
+          className="d-flex justify-content-between mb-3"
+          style={{ borderBottom: "1px solid black" }}
         >
-          X
-        </Button>
-      </div>
+          {console.log(this.props.comment)}
+          <p>{this.props.comment.comment}</p>
+          <Button
+            className="btn-sm"
+            variant="danger"
+            onClick={this.deleteComment}
+            style={{ margin: "4px" }}
+          >
+            X
+          </Button>
+        </div>
+      </>
     );
   }
 }
