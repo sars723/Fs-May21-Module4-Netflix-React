@@ -10,6 +10,7 @@ import logo from "../assets/netflix_logo.png";
 import profilePic from "../assets/profile-pic.jpg";
 import { FaSearch, FaBell, FaSortDown } from "react-icons/fa";
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 class NetflixNavbar extends Component {
   state = {
     query: "",
@@ -34,11 +35,31 @@ class NetflixNavbar extends Component {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto menu">
-            <Nav.Link href="#features">Home</Nav.Link>
-            <Nav.Link href="#features" active>
+            <Link
+              to="/"
+              className={
+                this.props.location.pathname === "/"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Home
+            </Link>
+            {/*  <Nav.Link href="#features">Home</Nav.Link> */}
+            <Link
+              to="/Tv-Shows"
+              className={
+                this.props.location.pathname === "/Tv-Shows"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
               Tv Shows
-            </Nav.Link>
-            <Nav.Link href="#features">Movies</Nav.Link>
+            </Link>
+            {/* <Nav.Link href="#features" active>
+              Tv Shows
+            </Nav.Link> */}
+            <Nav.Link href="#features">Movie</Nav.Link>
             <Nav.Link href="#features">Recently Added</Nav.Link>
             <Nav.Link href="#features">My List</Nav.Link>
           </Nav>
@@ -90,4 +111,4 @@ class NetflixNavbar extends Component {
   }
 }
 
-export default NetflixNavbar;
+export default withRouter(NetflixNavbar);

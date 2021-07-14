@@ -8,7 +8,7 @@ export default class AddComment extends Component {
     comments: {
       comment: "",
       rate: 1,
-      elementId: this.props.movie.imdbID,
+      elementId: this.props.movieAsin,
     },
     isLoading: true,
     isError: false,

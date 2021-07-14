@@ -38,6 +38,10 @@ nav .form-control {
 nav .menu {
   font-weight: bold !important;
 }
+#ShowDetail-container,
+#comment-area {
+  margin-top: 100px;
+}
 body {
   background-color: #141414 !important;
   color: white !important;

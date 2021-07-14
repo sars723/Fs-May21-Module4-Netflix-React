@@ -1,16 +1,19 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 import Warnning from "./Warnning";
+import Icon from "react-component-bytesize-icons";
 
-export default class SingleComment extends Component {
+class SingleComment extends Component {
   state = {
     isError: false,
   };
+
   deleteComment = async () => {
+    console.log(this.props.movieAsin);
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.movie.imdbID,
+          this.props.movieAsin,
         {
           method: "DELETE",
           headers: {
@@ -39,22 +42,26 @@ export default class SingleComment extends Component {
     return (
       <>
         {this.state.isError && <Warnning variant="danger" msg="error" />}
-        <div
-          className="d-flex justify-content-between mb-3"
-          style={{ borderBottom: "1px solid black" }}
-        >
-          {console.log(this.props.comment)}
-          <p>{this.props.comment.comment}</p>
-          <Button
-            className="btn-sm"
-            variant="danger"
-            onClick={this.deleteComment}
-            style={{ margin: "4px" }}
-          >
-            X
-          </Button>
-        </div>
+
+        <ListGroup variant="flush">
+          <ListGroup.Item>
+            <div
+              className="d-flex justify-content-between mb-3 text-dark"
+              style={{ borderBottom: "1px solid black" }}
+            >
+              <p>{this.props.comment.comment}</p>
+              <Button
+                className="btn-sm"
+                variant="danger"
+                onClick={this.deleteComment}
+              >
+                <Icon name="trash" />
+              </Button>
+            </div>
+          </ListGroup.Item>
+        </ListGroup>
       </>
     );
   }
 }
+export default SingleComment;

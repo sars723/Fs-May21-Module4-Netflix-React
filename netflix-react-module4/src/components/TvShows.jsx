@@ -4,7 +4,7 @@ import { Row, Carousel } from "react-bootstrap";
 import Warnning from "./Warnning";
 import Loader from "./Loader";
 
-export default class CustomCarousel extends Component {
+export default class TvShows extends Component {
   state = {
     movies: [],
 
@@ -12,15 +12,15 @@ export default class CustomCarousel extends Component {
     isError: false,
   };
   fetchMovies = async () => {
+    console.log(this.props.series);
     try {
-      console.log(this.props.searchQuery);
       const response = await fetch(
-        "http://www.omdbapi.com/?apikey=3d9e8fbe&s=" + this.props.searchQuery
+        `http://www.omdbapi.com/?apikey=3d9e8fbe&s=${this.props.series}&t=${this.props.series} `
       );
       const fetchedMovies = await response.json();
       this.setState({ movies: fetchedMovies.Search });
-      console.log(this.props.searchQuery);
-      console.log(this.state.movies[0].Title);
+      console.log(this.state.movies);
+      /*   console.log(this.state.movies[0].Title); */
       if (response.ok) {
         this.setState({ isLoading: false });
       } else {
@@ -36,7 +36,7 @@ export default class CustomCarousel extends Component {
     this.fetchMovies();
   };
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.searchQuery !== this.props.searchQuery) {
+    if (prevProps.series !== this.props.series) {
       this.fetchMovies();
     }
   }

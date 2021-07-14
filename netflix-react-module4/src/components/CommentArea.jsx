@@ -1,20 +1,22 @@
 import React, { Component } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container, Row, Col } from "react-bootstrap";
 import AddComment from "./AddComment";
 import SingleComment from "./SingleComment";
 import Warnning from "./Warnning";
 import Loader from "./Loader";
-export default class CommentArea extends Component {
+import { withRouter } from "react-router-dom";
+class CommentArea extends Component {
   state = {
     comments: [],
     isLoading: true,
     isError: false,
   };
   fetchComments = async () => {
+    console.log(this.props.match.params.id);
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.movie.imdbID,
+          /* this.props.movie.imdbID */ this.props.match.params.id,
         {
           headers: {
             Authorization:
@@ -45,7 +47,7 @@ export default class CommentArea extends Component {
     console.log("componentDidMount");
   };
   componentDidUpdate = (prevProps) => {
-    if (prevProps.movie.imdbID !== this.props.movie.imdbID) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
       this.fetchComments();
     }
 
@@ -53,38 +55,31 @@ export default class CommentArea extends Component {
   };
   render() {
     return (
-      <>
-        {this.state.isLoading && <Loader />}
-        {this.state.isError && <Warnning variant="danger" msg="error" />}
-        <Modal
-          show={this.props.show}
-          onHide={this.props.handleClose}
-          className="text-dark"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Comments</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="text-dark">
+      <Container id="comment-area">
+        <h3 className="text-center my-5">Comment Area</h3>
+        <Row className="justify-content-center">
+          <Col className="col-3">
+            {this.state.isLoading && <Loader />}
+            {this.state.isError && <Warnning variant="danger" msg="error" />}
+            <h6>Comments</h6>
             {this.state.comments &&
               this.state.comments.map((comment) => (
                 <SingleComment
                   comment={comment}
-                  movie={this.props.movie}
+                  movieAsin={this.props.match.params.id}
                   fetchComments={this.fetchComments}
                 />
               ))}
+          </Col>
+          <Col className="col-4 d-flex justify-content-end">
             <AddComment
-              movie={this.props.movie}
+              movieAsin={this.props.match.params.id}
               fetchComments={this.fetchComments}
             />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.props.handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
+export default CommentArea;
