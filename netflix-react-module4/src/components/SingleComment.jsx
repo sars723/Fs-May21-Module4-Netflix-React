@@ -13,7 +13,7 @@ class SingleComment extends Component {
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.movieAsin,
+          this.props.comment._id,
         {
           method: "DELETE",
           headers: {
