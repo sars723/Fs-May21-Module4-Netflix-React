@@ -28,7 +28,6 @@ class NetflixNavbar extends Component {
         expand="lg"
         variant="dark"
       >
-        {/*   <Container fluid> */}
         <Navbar.Brand href="#home">
           <img id="logo-navbar" src={logo} alt="" />
         </Navbar.Brand>
@@ -45,7 +44,7 @@ class NetflixNavbar extends Component {
             >
               Home
             </Link>
-            {/*  <Nav.Link href="#features">Home</Nav.Link> */}
+
             <Link
               to="/Tv-Shows"
               className={
@@ -56,9 +55,16 @@ class NetflixNavbar extends Component {
             >
               Tv Shows
             </Link>
-            {/* <Nav.Link href="#features" active>
-              Tv Shows
-            </Nav.Link> */}
+            <Link
+              to="/register"
+              className={
+                this.props.location.pathname === "/register"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Registration
+            </Link>
             <Nav.Link href="#features">Movie</Nav.Link>
             <Nav.Link href="#features">Recently Added</Nav.Link>
             <Nav.Link href="#features">My List</Nav.Link>
@@ -76,11 +82,6 @@ class NetflixNavbar extends Component {
                 id="search-icon"
                 variant="outline-success"
                 onClick={this.handleSearch}
-                /*  style={{
-                  border: "none",
-                  color: "white",
-                  backgroundColor: "none",
-                }} */
               >
                 <FaSearch />
               </Button>
@@ -105,7 +106,6 @@ class NetflixNavbar extends Component {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        {/*  </Container> */}
       </Navbar>
     );
   }

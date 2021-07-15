@@ -39,8 +39,13 @@ nav .menu {
   font-weight: bold !important;
 }
 #ShowDetail-container,
-#comment-area {
-  margin-top: 100px;
+#comment-area,
+#registration,
+#registration-result {
+  margin-top: 5rem;
+}
+#registration-result strong {
+  margin-right: 20px;
 }
 body {
   background-color: #141414 !important;

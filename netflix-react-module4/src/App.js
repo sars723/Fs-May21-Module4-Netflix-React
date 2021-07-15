@@ -9,10 +9,13 @@ import {BrowserRouter as Router,Route} from 'react-router-dom'
 import ShowDetail from "./components/ShowDetail"
 import CommentArea from "./components/CommentArea"
 import TvShows from "./components/TvShows"
+import Registration from "./components/Registration"
+import RegistrationResult from "./components/RegistrationResult"
 
 class App extends Component{
   state={
-    query:""
+    query:"",
+    filedForm:""
   }
   render(){
      return (
@@ -25,6 +28,8 @@ class App extends Component{
          />
          <Route path="/"  exact component={SearchArea}/>
         <Route  path="/Tv-Shows" exact component={SearchArea}/>
+
+        {/* Carousel Home page */}
          {!this.state.query ? (
           <Route path="/" exact render={props=> <CustomCarousel {...props} searchQuery="Kung Fu Panda" title="Kung Fu Panda" />}/> 
          ) : (
@@ -33,14 +38,18 @@ class App extends Component{
              title=" Searched Movies"
            />} />
          )}
-       <Route path="/" exact render={props=><CustomCarousel {...props} searchQuery="Luca" title="Luca" />}  />
+        <Route path="/" exact render={props=><CustomCarousel {...props} searchQuery="Luca" title="Luca" />}  />
         <Route path="/" exact render={props=><CustomCarousel {...props} searchQuery="Shrek" title="Shrek" />} />
         <Route path="/" exact render={props=><CustomCarousel {...props} searchQuery="Toy Story" title="Toy Story" />} />
 
+
            <Route path="/details/:id" exact render={props=><ShowDetail {...props}/>}/>
            <Route path="/comments/:id" exact render={props=> <CommentArea {...props}/>}/>
-           {console.log(this.state.query)}
-          {/*  <Route path="/Tv-Shows" exact render={props=> <TvShows series="r{...props}/>}/> */}
+          <Route path="/register" exact render={props=><Registration getFilledForm={(childResult)=>this.setState({filedForm:childResult})} {...props}/>}/>
+         {this.state.filedForm&& 
+         <Route path="/registration-result" exact render={props=><RegistrationResult filedForm={this.state.filedForm} {...props}/>}/>}
+        
+            {/* Carousel TvShows page */}
            {!this.state.query ? (
             <Route path="/Tv-Shows" exact render={props=> <TvShows title="Vikings" series="Vikings"{...props}/>}/>
            ) : (

@@ -16,7 +16,7 @@ class CommentArea extends Component {
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-          /* this.props.movie.imdbID */ this.props.match.params.id,
+          this.props.match.params.id,
         {
           headers: {
             Authorization:
