@@ -93,62 +93,18 @@ export default class Registration extends Component {
     ) {
       this.setState({
         errorconfirmPassword: "the passwords you entered are not the same",
+        isValid: false,
+      });
+    } else {
+      this.setState({
+        errorconfirmPassword: "",
         isValid: true,
       });
     }
   };
-  /* checkFormValidati0n = () => {
-    if (this.state.registration.name.length < 2) {
-      this.setState({
-        errorName: "name should be at least 2 chars",
-        isValid: false,
-      });
 
-      console.log(this.state.errorName);
-    }
-    if (this.state.registration.surname.length < 3) {
-      this.setState({
-        errorSurname: "surname should be at least 3 chars",
-        isValid: false,
-      });
-    }
-    if (
-      !this.state.registration.email.match(
-        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-      )
-    ) {
-      this.setState({ errorEmail: "invalid Email address", isValid: false });
-    }
-    if (
-      this.state.registration.password.length < 8 ||
-      !/[a-z]/.test(this.state.registration.password) ||
-      !/[A-Z]/.test(this.state.registration.password)
-    ) {
-      this.setState({ errorPassword: "invalid password", isValid: false });
-    }
-    if (
-      this.state.registration.password !==
-      this.state.registration.confirmPassword
-    ) {
-      this.setState({
-        errorconfirmPassword: "the passwords you entered are not the same",
-        isValid: false,
-      });
-    }
-    console.log(this.state.registration);
-    console.log(this.state.isValid);
-  }; */
-  /*  componentDidMount = () => {
-    this.checkFormValidati0n();
-  }; */
-  /* componentDidUpdate = (prevState) => {
-    if (prevState !== this.state.registration) {
-      this.checkFormValidati0n();
-    }
-  }; */
   handleSubmit = (e) => {
     e.preventDefault();
-    /*   this.checkFormValidati0n(); */
     if (this.state.isValid) {
       this.props.getFilledForm(this.state.registration);
       this.props.history.push("/registration-result");
