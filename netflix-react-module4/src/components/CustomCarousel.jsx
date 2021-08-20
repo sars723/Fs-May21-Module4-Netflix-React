@@ -20,7 +20,7 @@ export default class CustomCarousel extends Component {
         /*  process.env.REACT_APP_BE_PROD_URL + this.props.searchQuery */
       );
       const fetchedMovies = await response.json();
-      this.setState({ movies: fetchedMovies.Search });
+      this.setState({ movies: fetchedMovies });
       console.log(this.props.searchQuery);
       console.log(this.state.movies[0].Title);
       if (response.ok) {

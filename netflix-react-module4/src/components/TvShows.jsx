@@ -21,7 +21,7 @@ export default class TvShows extends Component {
       );
       console.log(this.props.series);
       const fetchedMovies = await response.json();
-      this.setState({ movies: fetchedMovies.Search });
+      this.setState({ movies: fetchedMovies });
       console.log(this.state.movies);
       /*   console.log(this.state.movies[0].Title); */
       if (response.ok) {
