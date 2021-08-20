@@ -17,7 +17,7 @@ export default class TvShows extends Component {
       const response = await fetch(
         /*   `http://www.omdbapi.com/?apikey=3d9e8fbe&s=${this.props.series}&t=${this.props.series} ` */
         /*  `${process.env.REACT_APP_BE_PROD_URL}/media&s=${this.props.series}&t=${this.props.series} ` */
-        `process.env.REACT_APP_BE_PROD_URL?s=${this.props.series}&t=${this.props.series} `
+        `${process.env.REACT_APP_BE_PROD_URL}media?s=${this.props.series}&t=${this.props.series} `
       );
       console.log(this.props.series);
       const fetchedMovies = await response.json();
