@@ -15,7 +15,9 @@ export default class CustomCarousel extends Component {
     try {
       console.log(this.props.searchQuery);
       const response = await fetch(
-        "http://www.omdbapi.com/?apikey=3d9e8fbe&s=" + this.props.searchQuery
+        /* "http://www.omdbapi.com/?apikey=3d9e8fbe&s=" + this.props.searchQuery */
+        `http://localhost:3003/media?s=${this.props.searchQuery}`
+        /*  process.env.REACT_APP_BE_PROD_URL + this.props.searchQuery */
       );
       const fetchedMovies = await response.json();
       this.setState({ movies: fetchedMovies.Search });
