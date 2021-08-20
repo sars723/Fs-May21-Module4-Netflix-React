@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 class MyCarouselMovie extends Component {
   state = {
     show: false,
+
     selected: false,
   };
   handleClose = () => this.setState({ show: false });
